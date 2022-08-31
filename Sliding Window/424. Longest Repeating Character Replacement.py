@@ -2,15 +2,18 @@ class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
         freq_map = {}
         left, max_length = 0, 0
+        max_freq = 0
         for right in range(len(s)):
              # insert frequency of current character in hashmap
             if s[right] not in freq_map:
                 freq_map[s[right]] = 0
             freq_map[s[right]] += 1
+            max_freq = max(max_freq, freq_map[s[right]])
             window_len = right - left + 1
-            max_freq = max(freq_map.values())
+            # max_freq = max(freq_map.values())
             if (window_len - max_freq) <= k:
                 max_length = max(max_length, window_len)
+                
             # if not a valid string
             if (window_len - max_freq) > k:
                 # decrement the value of the element at left
