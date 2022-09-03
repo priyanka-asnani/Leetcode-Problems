@@ -17,14 +17,14 @@ class Solution:
             # recursive case
             max_height, longest_path = 0, 0
             if node.left:
-                left_height = dfs(node.left)
-                longest_path += 1 + left_height
-                max_height = max(max_height, 1 + left_height)
+                left_height = 1 + dfs(node.left)
+                longest_path += left_height
+                max_height = max(max_height, left_height)
                 
             if node.right:
-                right_height = dfs(node.right)
-                longest_path += 1 + right_height
-                max_height = max(max_height, 1 + right_height)
+                right_height = 1 + dfs(node.right)
+                longest_path += right_height
+                max_height = max(max_height, right_height)
             
             # update the longest path
             diameter[0] = max(diameter[0], longest_path)
