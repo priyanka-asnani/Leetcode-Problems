@@ -1,16 +1,17 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        n = len(nums)
-        total_sum = 0
-        array_sum = 0
-        for i in range(n+1):
-            total_sum += i
+        # using cycle sort
+        for i in range(len(nums)):
+            while nums[i] != i:
+                dist = nums[i]
+                if dist < len(nums):
+                    nums[i], nums[dist] = nums[dist], nums[i]
+                else: break
 
-        for j in range(len(nums)):
-            array_sum += nums[j]
-        
-        # return difference of two arrays
-        return total_sum - array_sum
+        for i in range(len(nums)):
+            if nums[i] == len(nums):
+                return i
+        return len(nums)
 
 ## Time Complexity: O(N)
-## Space Complexity: O(1)
+## Time Complexity: O(1)
