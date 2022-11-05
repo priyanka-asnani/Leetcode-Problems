@@ -1,45 +1,36 @@
 class Solution:
     def isMajorityElement(self, nums: List[int], target: int) -> bool:
-        start_index = self.startIndex(nums, target)
-        print(start_index)
-        end_index = self.endIndex(nums, target)
-        print(end_index)
-        nums_length = len(nums)//2
-        integer_count = (end_index - start_index)+1
-        count = 0 if start_index == -1 and end_index == -1 else integer_count
-        if count > nums_length:
-            return True
-        
-        
+        start = self.startIndex(nums, target)
+        end = self.endIndex(nums, target)
+        count = (end - start) + 1
+        if start == -1 and end == -1: return False
+        if count > len(nums) // 2 : return True
+
     def startIndex(self, nums, target):
-        low = 0
-        high = len(nums)-1
-        index=-1
-        while low<=high:
-            mid = (low+high)//2
+        left, right = 0, len(nums) - 1
+        start_index = -1
+        while left <= right:
+            mid = left + (right - left) // 2
             if nums[mid] == target:
-                index=mid
-                high=mid-1
-            elif nums[mid] < target:
-                low = mid+1
-            else:
-                high=mid-1
-        return index
-    
+                start_index = mid
+                right = mid - 1
+            elif target > nums[mid]:
+                left = mid + 1
+            else: right = mid - 1
+        return start_index
+
     def endIndex(self, nums, target):
-        low = 0
-        high = len(nums)-1
-        index=-1
-        while low<=high:
-            mid = (low+high)//2
+        left, right = 0, len(nums) - 1
+        end_index = -1
+        while left <= right:
+            mid = left + (right - left) // 2
             if nums[mid] == target:
-                index=mid
-                low=mid+1
-            elif nums[mid] < target:
-                low = mid+1
-            else:
-                high=mid-1
-        return index
+                end_index = mid
+                left = mid + 1
+            elif target > nums[mid]:
+                left = mid + 1
+            else: right = mid - 1
+        return end_index
 
 ## Time Complexity: O(log N)
 ## Space Complexity: O(1)
